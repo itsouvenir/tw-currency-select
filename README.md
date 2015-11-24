@@ -19,7 +19,14 @@ The easiest way is to use bower
 
 ## How to use
 
-HTML - include tw-currency-select.js
+### Dependencies
+
+1. `angular`
+2. `jquery`
+3. `bootstrap`
+4. `bootstrap-select`
+
+### Simple case
 
 ```html
     <script src="path-to/ng-scroll-repeat.js"></script>
@@ -40,7 +47,9 @@ HTML
         ng-change="changedHandler()"></currency-select>
 ```
 
-OPTION - provide a `mapper` and an `extractor` to allow any object type in the currency list
+### Mapper & Extractor
+
+Allows providing a `mapper` and an `extractor` to allow any object type in the currency list
 
 Normally the currency-select component expects the currencies to have the following format
 
@@ -50,7 +59,6 @@ Normally the currency-select component expects the currencies to have the follow
 
 However by providing a mapper and an extractor as follows you can have a list of whatever type
 
-HTML
 ```html
     <currency-select
                     class="theDropdown"
@@ -61,9 +69,7 @@ HTML
                     ng-change="changedCodeHandler()"></currency-select>
 ```
 
-JS
 ```js
-
 $scope.currencyCodes = ['EUR', 'GBP'];
 
 $scope.codeMapper = function(code) {
@@ -74,3 +80,7 @@ $scope.codeExtractor = function(currency) {
     return currency.code;
 };
 ```
+
+### ng-change
+
+You can listen to change events and fire your own function using the `ng-change` attribute

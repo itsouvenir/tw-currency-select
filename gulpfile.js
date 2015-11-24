@@ -36,6 +36,7 @@ gulp.task('less', function() {
     gulp.src('./src/less/currencySelect.less')
         .pipe(less())
         .pipe(minifyCSS())
+        .pipe(rename('tw-currency-select.css'))
         .pipe(gulp.dest('./dist'));
 });
 
