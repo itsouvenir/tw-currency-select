@@ -49,6 +49,7 @@ Normally the currency-select component expects the currencies to have the follow
 ```
 
 However by providing a mapper and an extractor as follows you can have a list of whatever type
+
 HTML
 ```html
     <currency-select

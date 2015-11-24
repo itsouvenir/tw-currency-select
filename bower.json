@@ -1,6 +1,6 @@
 {
   "name": "tw-currency-select",
-  "version": "0.0.5",
+  "version": "0.0.1",
   "main": "dist/tw-currency-select.js",
   "ignore": [
     "example",
