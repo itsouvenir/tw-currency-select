@@ -4,6 +4,8 @@
 
 This plugin allows you to create a currency select dropdown on your page just by providing it with a list of currencies
 
+![alt tag](./example.png)
+
 Check a live example <a href="https://rawgit.com/transferwise/tw-currency-select/master/example/index.html" target="_blank">here</a>
 
 The code of the example can be found [here](./example/index.html)
