@@ -1,0 +1,138 @@
+@import './flags.less';
+@import '../../libs/bootstrap/less/variables';
+@import '../../libs/bootstrap/less/mixins/clearfix';
+@import '../../libs/bootstrap/less/mixins/border-radius';
+
+@flag-width-small: @input-font-size-small * 3 / 2;
+@flag-height-small: @input-font-size-small;
+@flag-input-padding-small: @padding-xs-horizontal;
+
+@flag-width: @input-font-size * 3 / 2;
+@flag-height: @input-font-size;
+@flag-input-padding: @padding-base-horizontal;
+
+@flag-width-large: @input-font-size-large * 3 / 2;
+@flag-height-large: @input-font-size-large;
+@flag-input-padding-large: @padding-large-horizontal;
+
+@flat-group-btn-width: 130px;
+@flat-group-btn-width-large: 140px;
+@flat-group-btn-width-small: 110px;
+
+.currencies {
+	span.caret {
+		right: @padding-base-horizontal;
+	}
+
+	width: inherit !important;
+
+	.flag-currency-code {
+		position: relative;
+		.flag-wrapper {
+			position: absolute;
+			top: 50%;
+			transform: translate(0, -50%);
+			width: @flag-width;
+			height: @flag-height;
+			.dropdown-flag  {
+				width: @flag-width;
+				height: @flag-height;
+			}
+		}
+		.currency-code {
+			font-size: @input-font-size;
+			padding-left: @flag-input-padding;
+			margin-left: @flag-width;
+		}
+	}
+
+	.bs-searchbox {
+		border-bottom: 1px solid @input-border;
+
+		input.form-control {
+			padding: 0;
+			border: none;
+		}
+	}
+}
+
+.form-group-sm .currencies {
+	.btn-input {
+		padding: @padding-xs-vertical @padding-xs-horizontal;
+
+		span.caret {
+			right: @padding-xs-horizontal;
+		}
+	}
+
+	.flag-currency-code {
+		.flag-wrapper {
+			width: @flag-width-small;
+			height: @flag-height-small;
+			.dropdown-flag  {
+				width: @flag-width-small;
+				height: @flag-height-small;
+			}
+		}
+		.currency-code {
+			font-size: @input-font-size-small;
+			padding-left: @flag-input-padding-small;
+			margin-left: @flag-width-small;
+		}
+	}
+}
+
+.form-group-lg .currencies {
+	span.caret {
+		right: @padding-large-horizontal;
+	}
+
+	.flag-currency-code {
+		.flag-wrapper {
+			width: @flag-width-large;
+			height: @flag-height-large;
+			.dropdown-flag {
+				width: @flag-width-large;
+				height: @flag-height-large;
+			}
+		}
+		.currency-code {
+			font-size: @input-font-size-large;
+			padding-left: @flag-input-padding-large;
+			margin-left: @flag-width-large;
+		}
+	}
+}
+
+// input button case
+.input-group-btn .currencies {
+	.btn,
+	.btn:hover,
+	.btn:focus,
+	.btn:active:focus,
+	.btn:active:hover {
+		width: @flat-group-btn-width;
+		color: inherit;
+		background-color: @input-bg;
+		border-color: @input-border;
+		border-left: none;
+		.border-left-radius(0);
+	}
+
+	.btn+.dropdown-menu {
+		background-color: @input-bg;
+		border: none;
+	}
+}
+
+.form-group-sm .input-group-btn .currencies {
+	.btn {
+		width: @flat-group-btn-width-small;
+	}
+}
+
+.form-group-lg .input-group-btn .currencies {
+	.btn {
+		width: @flat-group-btn-width-large;
+	}
+}

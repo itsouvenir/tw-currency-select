@@ -1,0 +1,28 @@
+{
+  "name": "tw-currency-select",
+  "version": "0.0.5",
+  "main": "dist/tw-currency-select.js",
+  "ignore": [
+    "example",
+    "source",
+    "test",
+    ".bowerrc",
+    ".gitignore",
+    "bower.json",
+    "gulpfile.js",
+    "package.json",
+    "README.md"
+  ],
+  "dependencies": {
+    "angular": "~1.3.17",
+    "bootstrap": "https://github.com/transferwise/bootstrap.git",
+    "bootstrap-select": "~1.7.5",
+    "jquery": "~2.1.4"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.3.0"
+  },
+  "resolutions": {
+    "angular": ">=1.2.18"
+  }
+}

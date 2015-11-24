@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html ng-app="currenciesApp">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>currency-select example</title>
+    <link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="../libs/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet">
+    <link href="../libs/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet">
+
+    <link href="../dist/currencySelect.css" rel="stylesheet">
+
+    <script src="../libs/angular/angular.js"></script>
+    <script src="../libs/jquery/dist/jquery.js"></script>
+    <script src="../libs/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="../libs/bootstrap-select/dist/js/bootstrap-select.js"></script>
+    <script src="../dist/tw-currency-select.js"></script>
+    <script>
+        var countriesApp = angular.module('currenciesApp', ['tw-currency-select']);
+        countriesApp.controller('CurrencyListController', function($scope) {
+
+            $scope.currencyChangeCount = 0;
+            $scope.currencyCodeChangeCount = 0;
+
+            $scope.currencies = [
+                {code: 'EUR', symbol: '€'},
+                {code: 'USD', symbol: '$'},
+                {code: 'GBP', symbol: '£'}
+            ];
+
+            $scope.currencyCodes =['EUR', 'USD', 'GBP'];
+
+            $scope.codeMapper = function(code) {
+                return {code: code};
+            };
+
+            $scope.codeExtractor = function(currency) {
+                return currency.code;
+            };
+
+            $scope.changedHandler = function() {
+                $scope.currencyChangeCount += 1;
+            };
+
+            $scope.changedCodeHandler = function() {
+                $scope.currencyCodeChangeCount += 1;
+            };
+        });
+    </script>
+    <style>
+        body {
+            padding: 20px;
+        }
+        .theDropdown {
+            width: 140px;
+        }
+    </style>
+</head>
+<body ng-controller="CurrencyListController">
+
+    <h1>Currency Dropdown</h1>
+
+    <section>
+        <h3>No mapper/extractor</h3>
+        <currency-select
+                class="theDropdown m-b-lg"
+                ng-model="selectedCurrency"
+                currencies="currencies"
+                ng-change="changedHandler()"></currency-select>
+        <pre>changeCount={{currencyChangeCount}}</pre>
+        <pre>{{selectedCurrency | json }}</pre>
+    </section>
+
+    <section>
+        <h3>With mapper/extractor</h3>
+        <currency-select
+                class="theDropdown"
+                ng-model="selectedCurrencyCode"
+                currencies="currencyCodes"
+                mapper="codeMapper"
+                extractor="codeExtractor"
+                ng-change="changedCodeHandler()"></currency-select>
+        <pre>changeCount={{currencyCodeChangeCount}}</pre>
+        <pre>{{selectedCurrencyCode}}</pre>
+    </section>
+</body>
+</html>

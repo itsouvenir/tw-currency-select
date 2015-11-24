@@ -1,0 +1,17 @@
+<select
+        class="selectpicker currencies"
+        data-live-search="true"
+        data-live-search-placeholder="Search..."
+        data-style="btn-input">
+    <option ng-repeat="currency in vm.mappedCurrencies track by currency.code"
+            data-content=
+                    "<div class='flag-currency-code'>
+                        <div class='flag-wrapper'>
+                            <div class='dropdown-flag flag24_{{vm.flagCode(currency.code)}}'></div>
+                        </div>
+                        <span class='currency-code'>{{currency.code}}</span>
+                    </div>"
+            value="{{currency.code}}">
+        {{currencys.code}}
+    </option>
+</select>
