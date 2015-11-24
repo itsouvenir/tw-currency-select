@@ -13,6 +13,8 @@ var rename = require('gulp-rename');
 var source = require('vinyl-source-stream');
 var templateCache = require('gulp-angular-templatecache');
 var uglify = require('gulp-uglify');
+var runSequence = require('run-sequence');
+
 
 //used for releasing
 require('gulp-release-tasks')(gulp);
@@ -71,4 +73,9 @@ gulp.task('dist', function() {
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('default', ['lint', 'bower', 'less', 'templates', 'test', 'dist']);
+gulp.task('default', function(callback) {
+    runSequence(['lint', 'bower', 'less', 'templates'],
+        'test',
+        'dist',
+        callback);
+});
