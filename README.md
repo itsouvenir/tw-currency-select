@@ -28,17 +28,17 @@ The easiest way is to use bower
 
 ### Simple case
 
+Add the script dependency
 ```html
     <script src="path-to/ng-scroll-repeat.js"></script>
 ```
 
-JS - inject ng-scroll-repeat
-
+Inject the directive into the required module
 ```js
     angular.module('myApp',['tw-currency-select']);
 ```
 
-HTML
+Use the html directive
 ```html
     <currency-select
         class="theDropdown m-b-lg"
