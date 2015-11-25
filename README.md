@@ -14,7 +14,7 @@ The code of the example can be found [here](./example/index.html)
 
 The easiest way is to use bower
 ```
-    bower install --save https://github.com/transferwise/tw-currency-select
+    bower install --save https://github.com/transferwise/tw-currency-select.git
 ```
 
 ## How to use
