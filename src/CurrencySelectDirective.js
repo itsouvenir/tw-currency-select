@@ -16,9 +16,9 @@ module.exports = function CurrencySelectDirective($timeout) {
             extractor: '=?',
             mapper: '=?',
             ngChange: '&'
-        }, compile: function(tElm) {
-            return function(scope) {
-                var $selectElement = $(tElm.find('select'));
+        }, compile: function() {
+            return function(scope, element) {
+                var $selectElement = $(element).find('select');
 
                 $selectElement.on('change', function() {
                     var value = this.value;
