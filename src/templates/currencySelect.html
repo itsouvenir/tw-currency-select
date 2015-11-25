@@ -3,6 +3,7 @@
         data-live-search="true"
         data-live-search-placeholder="Search..."
         data-style="btn-input">
+    <option data-hidden="true"></option>
     <option ng-repeat="currency in vm.mappedCurrencies track by currency.code"
             data-content=
                     "<div class='flag-currency-code'>
@@ -12,6 +13,6 @@
                         <span class='currency-code'>{{currency.code}}</span>
                     </div>"
             value="{{currency.code}}">
-        {{currencys.code}}
+        {{currency.code}}
     </option>
 </select>

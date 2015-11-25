@@ -28,11 +28,13 @@ module.exports = function CurrencySelectDirective($timeout) {
                 });
 
                 scope.$watch('vm.mappedModel', function(current) {
-                    if (current && current.code) {
-                        $selectElement.val(current.code);
-                    } else {
-                        $selectElement.val(undefined);
-                    }
+                    $timeout(function() {
+                        if (current && current.code) {
+                            $selectElement.selectpicker('val', current.code);
+                        } else {
+                            $selectElement.selectpicker('val', '');
+                        }
+                    });
                 });
 
                 scope.$watch('vm.mappedCurrencies', function (newVal) {
