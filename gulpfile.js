@@ -41,11 +41,7 @@ gulp.task('less', function() {
 });
 
 gulp.task('karma', function(done) {
-    var karmaServer = new KarmaServer({
-        configFile: __dirname + '/test/config/karma.conf.js',
-        singleRun: true
-    }, done);
-    karmaServer.start();
+    testKarma('/test/config/karma.conf.js', done);
 });
 
 gulp.task('test', function(done) {
@@ -84,3 +80,15 @@ gulp.task('default', function(callback) {
         'dist',
         callback);
 });
+
+gulp.task('testWithReport', function(done) {
+    testKarma('/test/config/karma.report.conf.js', done);
+});
+
+function testKarma(configFile, done) {
+    var karmaServer = new KarmaServer({
+        configFile: __dirname + configFile,
+        singleRun: true
+    }, done);
+    karmaServer.start();
+}
