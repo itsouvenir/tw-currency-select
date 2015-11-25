@@ -40,12 +40,16 @@ gulp.task('less', function() {
         .pipe(gulp.dest('./dist'));
 });
 
-gulp.task('test', function(done) {
+gulp.task('karma', function(done) {
     var karmaServer = new KarmaServer({
         configFile: __dirname + '/test/config/karma.conf.js',
         singleRun: true
     }, done);
     karmaServer.start();
+});
+
+gulp.task('test', function(done) {
+    runSequence('templates', 'karma', done);
 });
 
 gulp.task('templates', function () {
@@ -76,7 +80,7 @@ gulp.task('dist', function() {
 
 gulp.task('default', function(callback) {
     runSequence(['lint', 'bower', 'less', 'templates'],
-        'test',
+        'karma',
         'dist',
         callback);
 });
