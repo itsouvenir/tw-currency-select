@@ -1,6 +1,6 @@
 {
   "name": "tw-currency-select",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Currency selector based on bootsrap transferwise",
   "scripts": {
     "test": "node_modules/karma/bin/karma start test/config/karma.conf.js"
