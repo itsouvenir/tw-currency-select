@@ -2,7 +2,7 @@
 
 require('../src/twCurrencySelectModule');
 
-describe('Directive: CurrencyDropdown', function() {
+describe('Directive: CurrencySelect', function() {
     var $compile,
         $rootScope,
         $scope,
@@ -45,9 +45,9 @@ describe('Directive: CurrencyDropdown', function() {
                 togglePopup(directiveElement);
 
                 var listElements = getAllCurrencyOptions(directiveElement);
-                expect(listElements.length).toEqual(2);
-                expect(listElements[0].textContent).toContain('GBP');
-                expect(listElements[1].textContent).toContain('EUR');
+                expect(listElements.length).toEqual(3);
+                expect(listElements[1].textContent).toContain('GBP');
+                expect(listElements[2].textContent).toContain('EUR');
             });
 
             it('should properly select the clicked element', function() {
@@ -109,8 +109,15 @@ describe('Directive: CurrencyDropdown', function() {
             directiveElement = getCompiledElement();
         });
 
+        it('should select the hidden option when the model is undefined', function() {
+            $scope.selectedCurrency = undefined;
+            directiveElement = getCompiledElement();
+            expect(directiveElement[0].querySelectorAll('li.hidden.selected').length).toEqual(1);
+        });
+
         it('should select the defined value', function() {
             var isolateScope = directiveElement.isolateScope();
+            expect(directiveElement[0].querySelectorAll('li.selected').length).toEqual(1);
             expect(isolateScope.vm.mappedModel).toEqual({code: 'GBP'});
         });
 
@@ -123,7 +130,7 @@ describe('Directive: CurrencyDropdown', function() {
     });
 
     function selectOptionWithIndex(directiveElement, index) {
-        var entry = $(getAllCurrencyOptions(directiveElement)[index]);
+        var entry = $(getAllCurrencyOptions(directiveElement)[index + 1]);
         entry.find('a').trigger('click');
         $scope.$digest();
         $timeout.flush();

@@ -40,12 +40,12 @@ gulp.task('less', function() {
         .pipe(gulp.dest('./dist'));
 });
 
+gulp.task('karma', function(done) {
+    testKarma('/test/config/karma.conf.js', done);
+});
+
 gulp.task('test', function(done) {
-    var karmaServer = new KarmaServer({
-        configFile: __dirname + '/test/config/karma.conf.js',
-        singleRun: true
-    }, done);
-    karmaServer.start();
+    runSequence('templates', 'karma', done);
 });
 
 gulp.task('templates', function () {
@@ -76,7 +76,19 @@ gulp.task('dist', function() {
 
 gulp.task('default', function(callback) {
     runSequence(['lint', 'bower', 'less', 'templates'],
-        'test',
+        'karma',
         'dist',
         callback);
 });
+
+gulp.task('testWithReport', function(done) {
+    testKarma('/test/config/karma.report.conf.js', done);
+});
+
+function testKarma(configFile, done) {
+    var karmaServer = new KarmaServer({
+        configFile: __dirname + configFile,
+        singleRun: true
+    }, done);
+    karmaServer.start();
+}

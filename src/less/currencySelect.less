@@ -15,19 +15,13 @@
 @flag-height-large: @input-font-size-large;
 @flag-input-padding-large: @padding-large-horizontal;
 
-@flat-group-btn-width: 130px;
-@flat-group-btn-width-large: 140px;
-@flat-group-btn-width-small: 110px;
-
 .currencies {
-	span.caret {
-		right: @padding-base-horizontal;
-	}
-
 	width: inherit !important;
 
 	.flag-currency-code {
 		position: relative;
+		padding-right: @padding-base-horizontal;
+
 		.flag-wrapper {
 			position: absolute;
 			top: 50%;
@@ -59,13 +53,10 @@
 .form-group-sm .currencies {
 	.btn-input {
 		padding: @padding-xs-vertical @padding-xs-horizontal;
-
-		span.caret {
-			right: @padding-xs-horizontal;
-		}
 	}
 
 	.flag-currency-code {
+		padding-right: @padding-xs-horizontal;
 		.flag-wrapper {
 			width: @flag-width-small;
 			height: @flag-height-small;
@@ -83,11 +74,8 @@
 }
 
 .form-group-lg .currencies {
-	span.caret {
-		right: @padding-large-horizontal;
-	}
-
 	.flag-currency-code {
+		padding-right: @padding-large-horizontal;
 		.flag-wrapper {
 			width: @flag-width-large;
 			height: @flag-height-large;
@@ -111,7 +99,6 @@
 	.btn:focus,
 	.btn:active:focus,
 	.btn:active:hover {
-		width: @flat-group-btn-width;
 		color: inherit;
 		background-color: @input-bg;
 		border-color: @input-border;
@@ -122,17 +109,5 @@
 	.btn+.dropdown-menu {
 		background-color: @input-bg;
 		border: none;
-	}
-}
-
-.form-group-sm .input-group-btn .currencies {
-	.btn {
-		width: @flat-group-btn-width-small;
-	}
-}
-
-.form-group-lg .input-group-btn .currencies {
-	.btn {
-		width: @flat-group-btn-width-large;
 	}
 }
