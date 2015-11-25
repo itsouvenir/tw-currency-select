@@ -27,6 +27,9 @@
                 {code: 'GBP', symbol: '£'}
             ];
 
+            $scope.selectedCurrency = {code: 'EUR', symbol: '€'};
+            $scope.selectedCurrency2 = {code: 'EUR', symbol: '€'};
+
             $scope.currencyCodes =['EUR', 'USD', 'GBP'];
 
             $scope.codeMapper = function(code) {
@@ -51,7 +54,7 @@
             padding: 20px;
         }
         .theDropdown {
-            width: 140px;
+            width: 180px;
         }
     </style>
 </head>
@@ -62,7 +65,19 @@
     <section>
         <h3>No mapper/extractor</h3>
         <currency-select
+                class="theDropdown form-group-sm"
+                ng-model="selectedCurrency"
+                currencies="currencies"
+                ng-change="changedHandler()"></currency-select>
+
+        <currency-select
                 class="theDropdown m-b-lg"
+                ng-model="selectedCurrency"
+                currencies="currencies"
+                ng-change="changedHandler()"></currency-select>
+
+        <currency-select
+                class="theDropdown form-group-lg"
                 ng-model="selectedCurrency"
                 currencies="currencies"
                 ng-change="changedHandler()"></currency-select>
@@ -81,6 +96,25 @@
                 ng-change="changedCodeHandler()"></currency-select>
         <pre>changeCount={{currencyCodeChangeCount}}</pre>
         <pre>{{selectedCurrencyCode}}</pre>
+    </section>
+
+    <section>
+        <h3>As an input button</h3>
+        <div class="input-group">
+            <input type="number" step="any" required
+                   name="amount"
+                   class="form-control"
+                   ng-model="amount"
+                   placeholder="500"
+                   autocomplete="off" />
+            <div class="input-group-btn">
+                <currency-select
+                        ng-model="selectedCurrency2"
+                        currencies="currencies">
+                </currency-select>
+            </div>
+        </div>
+        <pre>{{selectedCurrency2.symbol}}{{amount}}</pre>
     </section>
 </body>
 </html>
