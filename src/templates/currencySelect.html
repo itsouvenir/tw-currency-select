@@ -1,7 +1,8 @@
 <select
         class="selectpicker currencies"
-        data-live-search="true"
-        data-live-search-placeholder="Search..."
+        data-live-search="{{vm.useSearch}}"
+        data-live-search-placeholder="{{vm.calculatedSearchPlaceholder}}"
+        data-none-results-text="{{vm.calculatedNoResultsText}}"
         data-style="btn-input">
     <option data-hidden="true"></option>
     <option ng-repeat="currency in vm.mappedCurrencies track by currency.code"

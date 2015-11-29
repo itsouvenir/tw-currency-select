@@ -2,6 +2,7 @@
 
 var angular = require('angular');
 var currencyCountryMap = require('./currencyCountryMap');
+var constants = require('./constants');
 
 module.exports = function CurrencySelectController($scope, $timeout) {
     var vm = this;
@@ -16,6 +17,7 @@ module.exports = function CurrencySelectController($scope, $timeout) {
         initCurrencies();
         initMappedCurrencies();
         initMappedModel();
+        initSearch();
         initWatchers();
     }
 
@@ -38,6 +40,20 @@ module.exports = function CurrencySelectController($scope, $timeout) {
 
     function initMappedModel() {
         vm.mappedModel = (vm.ngModel) ? vm.mapper(vm.ngModel) : undefined;
+    }
+
+    function initSearch() {
+        vm.useSearch = vm.noSearch !== constants.ATTR_NO_SEARCH;
+
+        vm.calculatedSearchPlaceholder = vm.searchPlaceholder;
+        if((!vm.searchPlaceholder) && vm.searchPlaceholder !== '') {
+            vm.calculatedSearchPlaceholder = constants.DEFAULT_SEARCH_PLACEHOLDER;
+        }
+
+        vm.calculatedNoResultsText = vm.noResultsText;
+        if (vm.noResultsText === '' || vm.noResultsText === '0' || (!vm.noResultsText)) {
+            vm.calculatedNoResultsText = constants.DEFAULT_NO_RESULTS_PLACEHOLDER;
+        }
     }
 
     function initWatchers() {

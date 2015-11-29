@@ -1,6 +1,7 @@
 'use strict';
 
 require('../src/twCurrencySelectModule');
+var constants = require('../src/constants');
 
 describe('Directive: CurrencySelect', function() {
     var $compile,
@@ -129,6 +130,81 @@ describe('Directive: CurrencySelect', function() {
         });
     });
 
+    describe('no-search', function() {
+        it('should hide the search element when specified', function() {
+            $scope.currencies = [{code: 'EUR'}, {code: 'GBP'}];
+            var directiveElement = getCompiledElementWithHiddenSearch();
+            togglePopup(directiveElement);
+            expect(directiveElement[0].querySelectorAll('.bs-searchbox').length).toEqual(0);
+        });
+
+        it('should not hide the search element when omitted', function() {
+            $scope.currencies = [{code: 'EUR'}, {code: 'GBP'}];
+            var directiveElement = getCompiledElement();
+            togglePopup(directiveElement);
+            expect(directiveElement[0].querySelectorAll('.bs-searchbox').length).toEqual(1);
+        });
+    });
+
+    describe('search-placeholder', function() {
+        it('should set the search text accordingly when specified', function() {
+            $scope.searchPlaceholder = 'Buscando...';
+            var directiveElement = getCompiledElementWithSearchPlaceholder();
+            var inputElement = directiveElement[0].querySelector('.bs-searchbox input');
+            var placeHolderValue = inputElement.getAttribute('placeholder');
+            expect(placeHolderValue).toEqual($scope.searchPlaceholder);
+        });
+
+        it('should set the search text to be specified as an empty string', function() {
+            $scope.searchPlaceholder = '';
+            var directiveElement = getCompiledElementWithSearchPlaceholder();
+            var inputElement = directiveElement[0].querySelector('.bs-searchbox input');
+            var placeHolderValue = inputElement.getAttribute('placeholder');
+            expect(placeHolderValue).toEqual($scope.searchPlaceholder);
+        });
+
+        it('should fallback to "Search..." when omitted', function() {
+            var directiveElement = getCompiledElement();
+            var inputElement = directiveElement[0].querySelector('.bs-searchbox input');
+            var placeHolderValue = inputElement.getAttribute('placeholder');
+            expect(placeHolderValue).toEqual(constants.DEFAULT_SEARCH_PLACEHOLDER);
+        });
+    });
+
+    describe('no-results-text', function() {
+        beforeEach(function() {
+            $scope.currencies = [{code: 'EUR'}];
+        });
+
+        it('should set the no results text accordingly when specified', function() {
+            $scope.noResultsText = 'Nada';
+            var directiveElement = getCompiledElementWithResultsText();
+            searchFor(directiveElement, 'doesNotExist');
+
+            var noResultsElement = directiveElement[0].querySelector('li.no-results');
+            var noResultsText = noResultsElement.innerText;
+            expect(noResultsText).toEqual($scope.noResultsText);
+        });
+
+        it('should set the no results text to the default when empty', function() {
+            $scope.noResultsText = '';
+            var directiveElement = getCompiledElementWithResultsText();
+            searchFor(directiveElement, 'doesNotExist');
+
+            var noResultsElement = directiveElement[0].querySelector('li.no-results');
+            var noResultsText = noResultsElement.innerText;
+            expect(noResultsText).toEqual(constants.DEFAULT_NO_RESULTS_PLACEHOLDER);
+        });
+
+        it('should fallback to "Search..." when omitted', function() {
+            var directiveElement = getCompiledElement();
+            searchFor(directiveElement, 'doesNotExist');
+
+            var noResultsElement = directiveElement[0].querySelector('li.no-results');
+            var noResultsText = noResultsElement.innerText;
+            expect(noResultsText).toEqual(constants.DEFAULT_NO_RESULTS_PLACEHOLDER);
+        });
+    });
     function selectOptionWithIndex(directiveElement, index) {
         var entry = $(getAllCurrencyOptions(directiveElement)[index + 1]);
         entry.find('a').trigger('click');
@@ -145,9 +221,42 @@ describe('Directive: CurrencySelect', function() {
         btn.triggerHandler('click');
     }
 
+    function searchFor(directiveElement, text) {
+        var input = angular.element(directiveElement[0].querySelector('.bs-searchbox input'));
+        $(input).val(text);
+        $(input).trigger('input');
+    }
+
     function getCompiledElement() {
         var element = angular.element('<currency-select ' +
             'ng-model="selectedCurrency" currencies="currencies" ng-change="changedHandler()"></currency-select>');
+        var compiledElement = $compile(element)($scope);
+        $scope.$digest();
+        $timeout.flush();
+        return compiledElement;
+    }
+
+    function getCompiledElementWithHiddenSearch() {
+        var element = angular.element('<currency-select ' +
+            'ng-model="selectedCurrency" no-search="no-search" currencies="currencies" ng-change="changedHandler()"></currency-select>');
+        var compiledElement = $compile(element)($scope);
+        $scope.$digest();
+        $timeout.flush();
+        return compiledElement;
+    }
+
+    function getCompiledElementWithSearchPlaceholder() {
+        var element = angular.element('<currency-select ' +
+            'ng-model="selectedCurrency" search-placeholder="{{searchPlaceholder}}" currencies="currencies" ng-change="changedHandler()"></currency-select>');
+        var compiledElement = $compile(element)($scope);
+        $scope.$digest();
+        $timeout.flush();
+        return compiledElement;
+    }
+
+    function getCompiledElementWithResultsText() {
+        var element = angular.element('<currency-select ' +
+            'ng-model="selectedCurrency" no-results-text="{{noResultsText}}" currencies="currencies" ng-change="changedHandler()"></currency-select>');
         var compiledElement = $compile(element)($scope);
         $scope.$digest();
         $timeout.flush();

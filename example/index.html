@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="currenciesApp">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>currency-select example</title>
 
     <link href="vendor/css/bootstrap.css" rel="stylesheet">
@@ -27,10 +27,16 @@
                 {code: 'GBP', symbol: '£'}
             ];
 
+            $scope.amount = 10;
             $scope.selectedCurrency = {code: 'EUR', symbol: '€'};
+            $scope.selectedCurrencyCode = 'USD';
             $scope.selectedCurrency2 = {code: 'EUR', symbol: '€'};
 
-            $scope.currencyCodes =['EUR', 'USD', 'GBP'];
+            $scope.currencyCodes = [
+                'EUR', 'AUD', 'BGN', 'BRL', 'CAD', 'CHF', 'CNY', 'CZK', 'DKK', 'GBP', 'GEL', 'HKD', 'HUF', 'INR', 'MYR',
+                'MXN', 'NOK', 'NZD', 'PLN', 'RON', 'SEK', 'SGD', 'THB', 'NGN', 'PKR', 'TRY', 'USD',
+                'ZAR', 'JPY', 'PHP', 'MAD', 'COP', 'AED', 'IDR', 'CLP', 'UAH', 'RUB'
+            ];
 
             $scope.codeMapper = function(code) {
                 return {code: code};
@@ -53,6 +59,7 @@
         body {
             padding: 20px;
         }
+
         .theDropdown {
             width: 180px;
         }
@@ -60,10 +67,12 @@
 </head>
 <body ng-controller="CurrencyListController">
 
-    <h1>Currency Dropdown</h1>
+<h1>Currency Dropdown</h1>
 
-    <section>
-        <h3>No mapper/extractor</h3>
+<section class="m-b-lg m-t-lg clearfix">
+    <h3>No mapper/extractor</h3>
+
+    <div class="col-lg-6">
         <currency-select
                 class="theDropdown form-group-sm"
                 ng-model="selectedCurrency"
@@ -81,12 +90,17 @@
                 ng-model="selectedCurrency"
                 currencies="currencies"
                 ng-change="changedHandler()"></currency-select>
-        <pre>changeCount={{currencyChangeCount}}</pre>
-        <pre>{{selectedCurrency | json }}</pre>
-    </section>
+    </div>
+    <div class="col-lg-6">
+        <pre class="col-lg-6">{{selectedCurrency}}</pre>
+        <pre class="col-lg-6">changeCount={{currencyChangeCount}}</pre>
+    </div>
+</section>
 
-    <section>
-        <h3>With mapper/extractor</h3>
+<section class="m-b-lg m-t-lg clearfix">
+    <h3>With mapper/extractor</h3>
+
+    <div class="col-lg-6">
         <currency-select
                 class="theDropdown"
                 ng-model="selectedCurrencyCode"
@@ -94,19 +108,25 @@
                 mapper="codeMapper"
                 extractor="codeExtractor"
                 ng-change="changedCodeHandler()"></currency-select>
-        <pre>changeCount={{currencyCodeChangeCount}}</pre>
-        <pre>{{selectedCurrencyCode}}</pre>
-    </section>
+    </div>
+    <div class="col-lg-6">
+        <pre class="col-lg-6">changeCount={{currencyCodeChangeCount}}</pre>
+        <pre class="col-lg-6">{{selectedCurrencyCode}}</pre>
+    </div>
+</section>
 
-    <section>
-        <h3>As an input button</h3>
+<section class="m-b-lg m-t-lg clearfix">
+    <h3>As an input button</h3>
+
+    <div class="col-lg-6">
         <div class="input-group">
             <input type="number" step="any" required
                    name="amount"
                    class="form-control"
                    ng-model="amount"
                    placeholder="500"
-                   autocomplete="off" />
+                   autocomplete="off"/>
+
             <div class="input-group-btn">
                 <currency-select
                         ng-model="selectedCurrency2"
@@ -114,7 +134,49 @@
                 </currency-select>
             </div>
         </div>
+    </div>
+    <div class="col-lg-6">
         <pre>{{selectedCurrency2.symbol}}{{amount}}</pre>
-    </section>
+    </div>
+</section>
+
+<section class="m-b-lg m-t-lg clearfix">
+    <h3>No search</h3>
+
+    <div class="col-lg-6">
+        <currency-select
+                no-search="no-search"
+                ng-model="selectedCurrency3"
+                currencies="currencies">
+        </currency-select>
+    </div>
+    <div class="col-lg-6">
+        <pre>{{selectedCurrency3}}</pre>
+    </div>
+</section>
+
+<section class="m-b-l m-t-lg clearfix">
+    <h3>Search place holder / No results text</h3>
+
+    <div>Default: English...</div>
+    <currency-select
+            ng-model="selectedCurrency4"
+            currencies="currencies">
+    </currency-select>
+    <div class="m-t-md">Spanish: Buscando... / Nada</div>
+    <currency-select
+            search-placeholder="Buscando..."
+            no-results-text="Nada"
+            ng-model="selectedCurrency5"
+            currencies="currencies">
+    </currency-select>
+    <div class="m-t-md">Empty</div>
+    <currency-select
+            search-placeholder=""
+            no-results-text=""
+            ng-model="selectedCurrency6"
+            currencies="currencies">
+    </currency-select>
+</section>
 </body>
 </html>

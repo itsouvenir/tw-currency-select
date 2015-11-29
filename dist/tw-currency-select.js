@@ -1,11 +1,12 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-'use strict'; module.exports = angular.module("tw-currency-select-templates", []).run(["$templateCache", function($templateCache) {$templateCache.put("templates/currencySelect.html","<select\n        class=\"selectpicker currencies\"\n        data-live-search=\"true\"\n        data-live-search-placeholder=\"Search...\"\n        data-style=\"btn-input\">\n    <option data-hidden=\"true\"></option>\n    <option ng-repeat=\"currency in vm.mappedCurrencies track by currency.code\"\n            data-content=\n                    \"<div class=\'flag-currency-code\'>\n                        <div class=\'flag-wrapper\'>\n                            <div class=\'dropdown-flag flag24_{{vm.flagCode(currency.code)}}\'></div>\n                        </div>\n                        <span class=\'currency-code\'>{{currency.code}}</span>\n                    </div>\"\n            value=\"{{currency.code}}\">\n        {{currency.code}}\n    </option>\n</select>\n");}]);
+'use strict'; module.exports = angular.module("tw-currency-select-templates", []).run(["$templateCache", function($templateCache) {$templateCache.put("templates/currencySelect.html","<select\n        class=\"selectpicker currencies\"\n        data-live-search=\"{{vm.useSearch}}\"\n        data-live-search-placeholder=\"{{vm.calculatedSearchPlaceholder}}\"\n        data-none-results-text=\"{{vm.calculatedNoResultsText}}\"\n        data-style=\"btn-input\">\n    <option data-hidden=\"true\"></option>\n    <option ng-repeat=\"currency in vm.mappedCurrencies track by currency.code\"\n            data-content=\n                    \"<div class=\'flag-currency-code\'>\n                        <div class=\'flag-wrapper\'>\n                            <div class=\'dropdown-flag flag24_{{vm.flagCode(currency.code)}}\'></div>\n                        </div>\n                        <span class=\'currency-code\'>{{currency.code}}</span>\n                    </div>\"\n            value=\"{{currency.code}}\">\n        {{currency.code}}\n    </option>\n</select>\n");}]);
 },{}],2:[function(require,module,exports){
 (function (global){
 'use strict';
 
 var angular = (typeof window !== "undefined" ? window['angular'] : typeof global !== "undefined" ? global['angular'] : null);
 var currencyCountryMap = require('./currencyCountryMap');
+var constants = require('./constants');
 
 module.exports = function CurrencySelectController($scope, $timeout) {
     var vm = this;
@@ -20,6 +21,7 @@ module.exports = function CurrencySelectController($scope, $timeout) {
         initCurrencies();
         initMappedCurrencies();
         initMappedModel();
+        initSearch();
         initWatchers();
     }
 
@@ -42,6 +44,20 @@ module.exports = function CurrencySelectController($scope, $timeout) {
 
     function initMappedModel() {
         vm.mappedModel = (vm.ngModel) ? vm.mapper(vm.ngModel) : undefined;
+    }
+
+    function initSearch() {
+        vm.useSearch = vm.noSearch !== constants.ATTR_NO_SEARCH;
+
+        vm.calculatedSearchPlaceholder = vm.searchPlaceholder;
+        if((!vm.searchPlaceholder) && vm.searchPlaceholder !== '') {
+            vm.calculatedSearchPlaceholder = constants.DEFAULT_SEARCH_PLACEHOLDER;
+        }
+
+        vm.calculatedNoResultsText = vm.noResultsText;
+        if (vm.noResultsText === '' || vm.noResultsText === '0' || (!vm.noResultsText)) {
+            vm.calculatedNoResultsText = constants.DEFAULT_NO_RESULTS_PLACEHOLDER;
+        }
     }
 
     function initWatchers() {
@@ -84,7 +100,7 @@ module.exports = function CurrencySelectController($scope, $timeout) {
 };
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./currencyCountryMap":4}],3:[function(require,module,exports){
+},{"./constants":4,"./currencyCountryMap":5}],3:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -103,7 +119,10 @@ module.exports = function CurrencySelectDirective($timeout) {
             ngModel: '=',
             extractor: '=?',
             mapper: '=?',
-            ngChange: '&'
+            ngChange: '&',
+            noSearch: '@',
+            searchPlaceholder: '@',
+            noResultsText: '@'
         }, compile: function() {
             return function(scope, element) {
                 var $selectElement = $(element).find('select');
@@ -144,6 +163,17 @@ module.exports = function CurrencySelectDirective($timeout) {
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],4:[function(require,module,exports){
+'use strict';
+
+var constants = {};
+
+constants.ATTR_NO_SEARCH = 'no-search';
+
+constants.DEFAULT_SEARCH_PLACEHOLDER = 'Search...';
+constants.DEFAULT_NO_RESULTS_PLACEHOLDER = 'No results';
+
+module.exports = constants;
+},{}],5:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -187,7 +217,7 @@ module.exports = {
 	RUB: 'RU'
 };
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -201,4 +231,4 @@ currencySelectModule.controller('CurrencySelectController', ['$scope', '$timeout
 currencySelectModule.directive('currencySelect', ['$timeout', CurrencySelectDirective]);
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../build/tw-currency-select-templates":1,"./CurrencySelectController":2,"./CurrencySelectDirective":3}]},{},[5]);
+},{"../build/tw-currency-select-templates":1,"./CurrencySelectController":2,"./CurrencySelectDirective":3}]},{},[6]);
