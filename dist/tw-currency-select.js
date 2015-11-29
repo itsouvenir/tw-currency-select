@@ -50,9 +50,6 @@ module.exports = function CurrencySelectController($scope, $timeout) {
         vm.useSearch = vm.noSearch !== constants.ATTR_NO_SEARCH;
 
         vm.calculatedSearchPlaceholder = vm.searchPlaceholder;
-        if((!vm.searchPlaceholder) && vm.searchPlaceholder !== '') {
-            vm.calculatedSearchPlaceholder = constants.DEFAULT_SEARCH_PLACEHOLDER;
-        }
 
         vm.calculatedNoResultsText = vm.noResultsText;
         if (vm.noResultsText === '' || vm.noResultsText === '0' || (!vm.noResultsText)) {

@@ -160,14 +160,14 @@ describe('Directive: CurrencySelect', function() {
             var directiveElement = getCompiledElementWithSearchPlaceholder();
             var inputElement = directiveElement[0].querySelector('.bs-searchbox input');
             var placeHolderValue = inputElement.getAttribute('placeholder');
-            expect(placeHolderValue).toEqual($scope.searchPlaceholder);
+            expect(placeHolderValue).toEqual('');
         });
 
-        it('should fallback to "Search..." when omitted', function() {
+        it('should be empty when omitted', function() {
             var directiveElement = getCompiledElement();
             var inputElement = directiveElement[0].querySelector('.bs-searchbox input');
             var placeHolderValue = inputElement.getAttribute('placeholder');
-            expect(placeHolderValue).toEqual(constants.DEFAULT_SEARCH_PLACEHOLDER);
+            expect(placeHolderValue).toEqual('');
         });
     });
 
@@ -196,7 +196,7 @@ describe('Directive: CurrencySelect', function() {
             expect(noResultsText).toEqual(constants.DEFAULT_NO_RESULTS_PLACEHOLDER);
         });
 
-        it('should fallback to "Search..." when omitted', function() {
+        it('should fallback to the default value when omitted', function() {
             var directiveElement = getCompiledElement();
             searchFor(directiveElement, 'doesNotExist');
 
