@@ -41,7 +41,6 @@ Inject the directive into the required module
 Use the html directive
 ```html
     <currency-select
-        class="theDropdown m-b-lg"
         ng-model="selectedCurrency"
         currencies="currencies"
         ng-change="changedHandler()"></currency-select>
@@ -61,12 +60,11 @@ However by providing a mapper and an extractor as follows you can have a list of
 
 ```html
     <currency-select
-                    class="theDropdown"
-                    ng-model="selectedCurrencyCode"
-                    currencies="currencyCodes"
-                    mapper="codeMapper"
-                    extractor="codeExtractor"
-                    ng-change="changedCodeHandler()"></currency-select>
+        ng-model="selectedCurrencyCode"
+        currencies="currencyCodes"
+        mapper="codeMapper"
+        extractor="codeExtractor"
+        ng-change="changedCodeHandler()"></currency-select>
 ```
 
 ```js
@@ -84,3 +82,28 @@ $scope.codeExtractor = function(currency) {
 ### ng-change
 
 You can listen to change events and fire your own function using the `ng-change` attribute
+
+### Hiding search
+
+To hide search you can add the attribute `no-search="no-search"` to the directive element.
+
+Example:
+```html
+    <currency-select
+        ng-model="selectedCurrency"
+        no-search="no-search"
+        ng-change="changedHandler()"></currency-select>
+```
+
+### Customizing search-placeholder and no-results-text
+
+You can customize the search-placeholder and no-results text by passing the attributes to the directive element.
+
+Example:
+```html
+    <currency-select
+        ng-model="selectedCurrency"
+        search-placeholder="Search currency..."
+        no-results-text="Ups! Nothing found for {0}"
+        ng-change="changedHandler()"></currency-select>
+```
