@@ -205,6 +205,26 @@ describe('Directive: CurrencySelect', function() {
             expect(noResultsText).toEqual(constants.DEFAULT_NO_RESULTS_PLACEHOLDER);
         });
     });
+
+    describe('none-selected-text', function() {
+        beforeEach(function() {
+            $scope.currencies = [{code: 'EUR'}];
+        });
+
+        it('should default to empty', function() {
+            var directiveElement = getCompiledElement();
+            var noneSelectedElement = directiveElement[0].querySelector('.btn > span');
+            expect(noneSelectedElement.innerText).toEqual('');
+        });
+
+        it('should set the text to the specified value', function() {
+            $scope.noneSelectedText = 'Nothing is here';
+            var directiveElement = getCompiledElementWithNoneSelectedText();
+            var noneSelectedElement = directiveElement[0].querySelector('.btn > span');
+            expect(noneSelectedElement.innerText).toEqual($scope.noneSelectedText);
+        });
+    });
+
     function selectOptionWithIndex(directiveElement, index) {
         var entry = $(getAllCurrencyOptions(directiveElement)[index + 1]);
         entry.find('a').trigger('click');
@@ -257,6 +277,15 @@ describe('Directive: CurrencySelect', function() {
     function getCompiledElementWithResultsText() {
         var element = angular.element('<currency-select ' +
             'ng-model="selectedCurrency" no-results-text="{{noResultsText}}" currencies="currencies" ng-change="changedHandler()"></currency-select>');
+        var compiledElement = $compile(element)($scope);
+        $scope.$digest();
+        $timeout.flush();
+        return compiledElement;
+    }
+
+    function getCompiledElementWithNoneSelectedText() {
+        var element = angular.element('<currency-select ' +
+            'ng-model="selectedCurrency" none-selected-text="{{noneSelectedText}}" currencies="currencies" ng-change="changedHandler()"></currency-select>');
         var compiledElement = $compile(element)($scope);
         $scope.$digest();
         $timeout.flush();

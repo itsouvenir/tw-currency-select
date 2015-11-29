@@ -18,7 +18,8 @@ module.exports = function CurrencySelectDirective($timeout) {
             ngChange: '&',
             noSearch: '@',
             searchPlaceholder: '@',
-            noResultsText: '@'
+            noResultsText: '@',
+            noneSelectedText: '@'
         }, compile: function() {
             return function(scope, element) {
                 var $selectElement = $(element).find('select');

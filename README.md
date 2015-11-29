@@ -95,7 +95,7 @@ Example:
         ng-change="changedHandler()"></currency-select>
 ```
 
-### Customizing search-placeholder and no-results-text
+### Customizing search-placeholder, no-results-text and none-selected-text
 
 You can customize the search-placeholder and no-results text by passing the attributes to the directive element.
 
@@ -105,5 +105,6 @@ Example:
         ng-model="selectedCurrency"
         search-placeholder="Search currency..."
         no-results-text="Ups! Nothing found for {0}"
+        none-selected-text="Nothing here yet!"
         ng-change="changedHandler()"></currency-select>
 ```

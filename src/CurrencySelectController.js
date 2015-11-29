@@ -18,6 +18,7 @@ module.exports = function CurrencySelectController($scope, $timeout) {
         initMappedCurrencies();
         initMappedModel();
         initSearch();
+        initNoneSelectedText();
         initWatchers();
     }
 
@@ -51,6 +52,10 @@ module.exports = function CurrencySelectController($scope, $timeout) {
         if (vm.noResultsText === '' || vm.noResultsText === '0' || (!vm.noResultsText)) {
             vm.calculatedNoResultsText = constants.DEFAULT_NO_RESULTS_PLACEHOLDER;
         }
+    }
+
+    function initNoneSelectedText() {
+        vm.calculatedNoneSelectedText = vm.noneSelectedText || '';
     }
 
     function initWatchers() {

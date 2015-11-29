@@ -31,6 +31,7 @@
             $scope.selectedCurrency = {code: 'EUR', symbol: '€'};
             $scope.selectedCurrencyCode = 'USD';
             $scope.selectedCurrency2 = {code: 'EUR', symbol: '€'};
+            $scope.selectedCurrency3 = {code: 'GBP', symbol: '£'};
 
             $scope.currencyCodes = [
                 'EUR', 'AUD', 'BGN', 'BRL', 'CAD', 'CHF', 'CNY', 'CZK', 'DKK', 'GBP', 'GEL', 'HKD', 'HUF', 'INR', 'MYR',
@@ -156,24 +157,26 @@
 </section>
 
 <section class="m-b-l m-t-lg clearfix">
-    <h3>Search place holder / No results text</h3>
+    <h3>Search place holder / No results text / Nothing selected text</h3>
 
-    <div>Default: English...</div>
+    <div>Default:</div>
     <currency-select
             ng-model="selectedCurrency4"
             currencies="currencies">
     </currency-select>
-    <div class="m-t-md">Spanish: Buscando... / Nada</div>
+    <div class="m-t-md">English: Search... / Ups nothing found for {0} / Nothing selected</div>
     <currency-select
-            search-placeholder="Buscando..."
-            no-results-text="Nada"
+            search-placeholder="Search..."
+            none-selected-text="Nothing yet"
+            no-results-text="Ups nothing found for {0}"
             ng-model="selectedCurrency5"
             currencies="currencies">
     </currency-select>
-    <div class="m-t-md">Empty</div>
+    <div class="m-t-md">Spanish: Buscando... / Nada / Aun nada</div>
     <currency-select
-            search-placeholder=""
-            no-results-text=""
+            search-placeholder="Buscando..."
+            none-selected-text="Aun nada"
+            no-results-text="Nada"
             ng-model="selectedCurrency6"
             currencies="currencies">
     </currency-select>

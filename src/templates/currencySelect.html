@@ -3,6 +3,7 @@
         data-live-search="{{vm.useSearch}}"
         data-live-search-placeholder="{{vm.calculatedSearchPlaceholder}}"
         data-none-results-text="{{vm.calculatedNoResultsText}}"
+        data-none-selected-text="{{vm.calculatedNoneSelectedText}}"
         data-style="btn-input">
     <option data-hidden="true"></option>
     <option ng-repeat="currency in vm.mappedCurrencies track by currency.code"
