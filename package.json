@@ -3,7 +3,7 @@
   "version": "0.0.10",
   "description": "Currency selector based on bootsrap transferwise",
   "scripts": {
-    "test": "node_modules/karma/bin/karma start test/config/karma.conf.js"
+    "test": "gulp test"
   },
   "repository": {
     "type": "git",
