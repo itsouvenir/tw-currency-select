@@ -133,3 +133,17 @@ You can hide the currency names in the selected value or in the options using th
         hide-name-selected="true"
         ></currency-select>
 ```
+
+### Adding custom option at the end of the dropdown menu
+
+You can add (only) one custom `<li>` element at the end of the dropdown-menu by inserting it inside the currency element 
+
+```html
+    <currency-select
+        ng-model="selectedCurrency"
+        currencies="currencyList">
+
+        <li><a ng-click="doWhatever()">Other</a></li>
+
+    </currency-select>
+```
