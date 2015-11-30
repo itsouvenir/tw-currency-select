@@ -108,3 +108,31 @@ Example:
         none-selected-text="Nothing here yet!"
         ng-change="changedHandler()"></currency-select>
 ```
+
+### Displaying currency names
+
+To display currency names you just need to decorate your currencies with a name option.
+
+If your currency doesn't have a name it will just be ignored
+
+
+```js
+    [{code: 'EUR', name: 'Euro'}, {code: 'GBP', name: 'British Pound'}]
+```
+
+### Hiding currency names in the selected value or the options
+
+You can hide the currency names in the selected value or in the options using the properties:
+
+- hide-name-options
+- hide-name-selected
+
+Example:
+
+```html
+    <currency-select
+        ng-model="selectedCurrency"
+        hide-name-options="true"
+        hide-name-selected="true"
+        ></currency-select>
+```
