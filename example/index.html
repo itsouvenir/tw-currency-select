@@ -27,6 +27,12 @@
                 {code: 'GBP', symbol: '£'}
             ];
 
+            $scope.currenciesWithNames = [
+                {code: 'EUR', symbol: '€', name: 'Euro'},
+                {code: 'USD', symbol: '$', name: 'US Dollar'},
+                {code: 'GBP', symbol: '£', name: 'British Pound'}
+            ];
+
             $scope.amount = 10;
             $scope.selectedCurrency = {code: 'EUR', symbol: '€'};
             $scope.selectedCurrencyCode = 'USD';
@@ -181,5 +187,44 @@
             currencies="currencies">
     </currency-select>
 </section>
+
+<section class="m-b-l m-t-lg clearfix">
+    <h3>Showing the name of currencies</h3>
+
+    <div>Showing name both in options and in selected value</div>
+    <currency-select
+            search-placeholder="Search..."
+            none-selected-text="Nothing selected"
+            ng-model="selectedCurrency7"
+            currencies="currenciesWithNames">
+    </currency-select>
+    <div class="m-t-md">Hiding name in options</div>
+    <currency-select
+            search-placeholder="Search..."
+            hide-name-options="true"
+            none-selected-text="Nothing selected"
+            ng-model="selectedCurrency8"
+            currencies="currenciesWithNames">
+    </currency-select>
+    <div class="m-t-md">Hiding name in selected value</div>
+    <currency-select
+            search-placeholder="Search..."
+            hide-name-selected="true"
+            none-selected-text="Nothing selected"
+            ng-model="selectedCurrency9"
+            currencies="currenciesWithNames">
+    </currency-select>
+    <div class="m-t-md">Hiding name in selected value and options</div>
+    <currency-select
+            search-placeholder="Search..."
+            hide-name-selected="true"
+            hide-name-options="true"
+            none-selected-text="Nothing selected"
+            ng-model="selectedCurrency10"
+            currencies="currenciesWithNames">
+    </currency-select>
+
+</section>
+
 </body>
 </html>

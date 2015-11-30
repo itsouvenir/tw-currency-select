@@ -1,5 +1,5 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-'use strict'; module.exports = angular.module("tw-currency-select-templates", []).run(["$templateCache", function($templateCache) {$templateCache.put("templates/currencySelect.html","<select\n        class=\"selectpicker currencies\"\n        data-live-search=\"{{vm.useSearch}}\"\n        data-live-search-placeholder=\"{{vm.calculatedSearchPlaceholder}}\"\n        data-none-results-text=\"{{vm.calculatedNoResultsText}}\"\n        data-none-selected-text=\"{{vm.calculatedNoneSelectedText}}\"\n        data-style=\"btn-input\">\n    <option data-hidden=\"true\"></option>\n    <option ng-repeat=\"currency in vm.mappedCurrencies track by currency.code\"\n            data-content=\n                    \"<div class=\'flag-currency-code\'>\n                        <div class=\'flag-wrapper\'>\n                            <div class=\'dropdown-flag flag24_{{vm.flagCode(currency.code)}}\'></div>\n                        </div>\n                        <span class=\'currency-code\'>{{currency.code}}</span>\n                    </div>\"\n            value=\"{{currency.code}}\">\n        {{currency.code}}\n    </option>\n</select>\n");}]);
+'use strict'; module.exports = angular.module("tw-currency-select-templates", []).run(["$templateCache", function($templateCache) {$templateCache.put("templates/currencySelect.html","<select\n        class=\"selectpicker currencies\"\n        data-live-search=\"{{vm.useSearch}}\"\n        data-live-search-placeholder=\"{{vm.calculatedSearchPlaceholder}}\"\n        data-none-results-text=\"{{vm.calculatedNoResultsText}}\"\n        data-none-selected-text=\"{{vm.calculatedNoneSelectedText}}\"\n        data-style=\"btn-input\">\n    <option data-hidden=\"true\"></option>\n    <option ng-repeat=\"currency in vm.mappedCurrencies track by currency.code\"\n            data-content=\n                    \"<div class=\'flag-currency-code\'>\n                        <div class=\'flag-wrapper\'>\n                            <div class=\'dropdown-flag flag24_{{vm.flagCode(currency.code)}}\'></div>\n                        </div>\n                        <span class=\'currency-code\'>{{currency.code}}</span>\n                        <span class=\'currency-name {{vm.hideNameClasses}}\'>{{currency.name}}</span>\n                    </div>\"\n            value=\"{{currency.code}}\">\n        {{currency.code}}\n    </option>\n</select>\n");}]);
 },{}],2:[function(require,module,exports){
 (function (global){
 'use strict';
@@ -23,6 +23,7 @@ module.exports = function CurrencySelectController($scope, $timeout) {
         initMappedModel();
         initSearch();
         initNoneSelectedText();
+        initHideNameClasses();
         initWatchers();
     }
 
@@ -60,6 +61,17 @@ module.exports = function CurrencySelectController($scope, $timeout) {
 
     function initNoneSelectedText() {
         vm.calculatedNoneSelectedText = vm.noneSelectedText || '';
+    }
+
+    function initHideNameClasses() {
+        var hideNameClasses = [];
+        if (vm.hideNameOptions && vm.hideNameOptions.length > 0) {
+            hideNameClasses.push(constants.CLASS_HIDE_NAME_OPTIONS);
+        }
+        if (vm.hideNameSelected && vm.hideNameSelected.length > 0) {
+            hideNameClasses.push(constants.CLASS_HIDE_NAME_SELECTED);
+        }
+        vm.hideNameClasses = hideNameClasses.join(' ');
     }
 
     function initWatchers() {
@@ -125,7 +137,9 @@ module.exports = function CurrencySelectDirective($timeout) {
             noSearch: '@',
             searchPlaceholder: '@',
             noResultsText: '@',
-            noneSelectedText: '@'
+            noneSelectedText: '@',
+            hideNameSelected: '@',
+            hideNameOptions: '@'
         }, compile: function() {
             return function(scope, element) {
                 var $selectElement = $(element).find('select');
@@ -172,8 +186,12 @@ var constants = {};
 
 constants.ATTR_NO_SEARCH = 'no-search';
 
+constants.CLASS_HIDE_NAME_OPTIONS = 'hide-name-options';
+constants.CLASS_HIDE_NAME_SELECTED = 'hide-name-selected';
+
 constants.DEFAULT_SEARCH_PLACEHOLDER = 'Search...';
 constants.DEFAULT_NO_RESULTS_PLACEHOLDER = 'No results';
+
 
 module.exports = constants;
 },{}],5:[function(require,module,exports){

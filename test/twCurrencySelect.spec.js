@@ -225,6 +225,30 @@ describe('Directive: CurrencySelect', function() {
         });
     });
 
+    describe('hide-name-selected', function() {
+        beforeEach(function() {
+            $scope.currencies = [{code: 'EUR'}];
+        });
+
+        it('should hide the name in the options when specified', function() {
+            var directiveElement = getCompiledElementWithHideNameSelected();
+            var currencyNameElement = directiveElement[0].querySelector('.currency-name');
+            expect($(currencyNameElement).hasClass(constants.CLASS_HIDE_NAME_SELECTED)).toBe(true);
+        });
+    });
+
+    describe('hide-name-options', function() {
+        beforeEach(function() {
+            $scope.currencies = [{code: 'EUR'}];
+        });
+
+        it('should hide the name in the options when specified', function() {
+            var directiveElement = getCompiledElementWithHideNameOptions();
+            var currencyNameElement = directiveElement[0].querySelector('.currency-name');
+            expect($(currencyNameElement).hasClass(constants.CLASS_HIDE_NAME_OPTIONS)).toBe(true);
+        });
+    });
+
     function selectOptionWithIndex(directiveElement, index) {
         var entry = $(getAllCurrencyOptions(directiveElement)[index + 1]);
         entry.find('a').trigger('click');
@@ -286,6 +310,24 @@ describe('Directive: CurrencySelect', function() {
     function getCompiledElementWithNoneSelectedText() {
         var element = angular.element('<currency-select ' +
             'ng-model="selectedCurrency" none-selected-text="{{noneSelectedText}}" currencies="currencies" ng-change="changedHandler()"></currency-select>');
+        var compiledElement = $compile(element)($scope);
+        $scope.$digest();
+        $timeout.flush();
+        return compiledElement;
+    }
+
+    function getCompiledElementWithHideNameSelected() {
+        var element = angular.element('<currency-select ' +
+            'ng-model="selectedCurrency" hide-name-selected="true" currencies="currencies" ng-change="changedHandler()"></currency-select>');
+        var compiledElement = $compile(element)($scope);
+        $scope.$digest();
+        $timeout.flush();
+        return compiledElement;
+    }
+
+    function getCompiledElementWithHideNameOptions() {
+        var element = angular.element('<currency-select ' +
+            'ng-model="selectedCurrency" hide-name-options="true" currencies="currencies" ng-change="changedHandler()"></currency-select>');
         var compiledElement = $compile(element)($scope);
         $scope.$digest();
         $timeout.flush();

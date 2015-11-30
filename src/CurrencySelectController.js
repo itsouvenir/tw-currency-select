@@ -19,6 +19,7 @@ module.exports = function CurrencySelectController($scope, $timeout) {
         initMappedModel();
         initSearch();
         initNoneSelectedText();
+        initHideNameClasses();
         initWatchers();
     }
 
@@ -56,6 +57,17 @@ module.exports = function CurrencySelectController($scope, $timeout) {
 
     function initNoneSelectedText() {
         vm.calculatedNoneSelectedText = vm.noneSelectedText || '';
+    }
+
+    function initHideNameClasses() {
+        var hideNameClasses = [];
+        if (vm.hideNameOptions && vm.hideNameOptions.length > 0) {
+            hideNameClasses.push(constants.CLASS_HIDE_NAME_OPTIONS);
+        }
+        if (vm.hideNameSelected && vm.hideNameSelected.length > 0) {
+            hideNameClasses.push(constants.CLASS_HIDE_NAME_SELECTED);
+        }
+        vm.hideNameClasses = hideNameClasses.join(' ');
     }
 
     function initWatchers() {

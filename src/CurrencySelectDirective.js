@@ -19,7 +19,9 @@ module.exports = function CurrencySelectDirective($timeout) {
             noSearch: '@',
             searchPlaceholder: '@',
             noResultsText: '@',
-            noneSelectedText: '@'
+            noneSelectedText: '@',
+            hideNameSelected: '@',
+            hideNameOptions: '@'
         }, compile: function() {
             return function(scope, element) {
                 var $selectElement = $(element).find('select');
