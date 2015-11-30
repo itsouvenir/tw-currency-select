@@ -290,7 +290,7 @@ describe('Directive: CurrencySelect', function() {
 
     function getCompiledElementWithHiddenSearch() {
         var element = angular.element('<currency-select ' +
-            'ng-model="selectedCurrency" no-search="no-search" currencies="currencies" ng-change="changedHandler()"></currency-select>');
+            'ng-model="selectedCurrency" no-search="true" currencies="currencies" ng-change="changedHandler()"></currency-select>');
         var compiledElement = $compile(element)($scope);
         $scope.$digest();
         $timeout.flush();

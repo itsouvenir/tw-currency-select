@@ -2,7 +2,7 @@
 
 var constants = {};
 
-constants.ATTR_NO_SEARCH = 'no-search';
+constants.ATTR_NO_SEARCH = 'true';
 
 constants.CLASS_HIDE_NAME_OPTIONS = 'hide-name-options';
 constants.CLASS_HIDE_NAME_SELECTED = 'hide-name-selected';

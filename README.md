@@ -88,12 +88,12 @@ You can listen to change events and fire your own function using the `ng-change`
 
 ### Hiding search
 
-To hide search you can add the attribute `no-search="no-search"` to the directive element.
+To hide search you can add the attribute `no-search="true"` to the directive element.
 
 ```html
 <currency-select
     ng-model="selectedCurrency"
-    no-search="no-search"
+    no-search="true"
     ng-change="changedHandler()">
 </currency-select>
 ```
