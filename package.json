@@ -1,6 +1,6 @@
 {
   "name": "tw-currency-select",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Currency selector based on bootsrap transferwise",
   "scripts": {
     "test": "gulp test"
