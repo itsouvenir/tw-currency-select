@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 var templateCache = require('gulp-angular-templatecache');
 
-gulp.task('templates', function () {
+gulp.task('templates', ['bower'], function () {
     return gulp.src('src/templates/*.html')
         .pipe(templateCache('tw-currency-select-templates.js', {
             standalone: true,
