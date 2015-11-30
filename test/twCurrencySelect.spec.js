@@ -45,7 +45,7 @@ describe('Directive: CurrencySelect', function() {
             it('should create an option for each specified currency', function() {
                 togglePopup(directiveElement);
 
-                var listElements = getAllCurrencyOptions(directiveElement);
+                var listElements = getAllDropdownOptions(directiveElement);
                 expect(listElements.length).toEqual(3);
                 expect(listElements[1].textContent).toContain('GBP');
                 expect(listElements[2].textContent).toContain('EUR');
@@ -249,14 +249,22 @@ describe('Directive: CurrencySelect', function() {
         });
     });
 
+    describe('transclude', function() {
+       it('should allow adding a custom LIST element', function() {
+           var directiveElement = getCompiledElementWithTranscludedElement();
+           var options = getAllDropdownOptions(directiveElement);
+           expect(options.length).toBe(2);
+       });
+    });
+
     function selectOptionWithIndex(directiveElement, index) {
-        var entry = $(getAllCurrencyOptions(directiveElement)[index + 1]);
+        var entry = $(getAllDropdownOptions(directiveElement)[index + 1]);
         entry.find('a').trigger('click');
         $scope.$digest();
         $timeout.flush();
     }
 
-    function getAllCurrencyOptions(directiveElement) {
+    function getAllDropdownOptions(directiveElement) {
         return directiveElement[0].querySelectorAll('.dropdown-menu > li');
     }
 
@@ -328,6 +336,18 @@ describe('Directive: CurrencySelect', function() {
     function getCompiledElementWithHideNameOptions() {
         var element = angular.element('<currency-select ' +
             'ng-model="selectedCurrency" hide-name-options="true" currencies="currencies" ng-change="changedHandler()"></currency-select>');
+        var compiledElement = $compile(element)($scope);
+        $scope.$digest();
+        $timeout.flush();
+        return compiledElement;
+    }
+
+    function getCompiledElementWithTranscludedElement() {
+        var element = angular.element(
+            '<currency-select ' +
+            'ng-model="selectedCurrency" hide-name-options="true" currencies="currencies" ng-change="changedHandler()">' +
+            '<li class="transcluded-element"></li>' +
+            '</currency-select>');
         var compiledElement = $compile(element)($scope);
         $scope.$digest();
         $timeout.flush();
