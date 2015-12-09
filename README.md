@@ -31,7 +31,7 @@ The easiest way is to use bower
 
 Add the script dependency
 ```html
-<script src="path-to/ng-scroll-repeat.js"></script>
+<script src="path-to/tw-currency-select.js"></script>
 ```
 
 Inject the directive into the required module
