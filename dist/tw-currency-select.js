@@ -262,7 +262,9 @@ module.exports = {
 	CLP: 'CL',
 	UAH: 'UA',
 	GHS: 'GH',
-	RUB: 'RU'
+	RUB: 'RU',
+	LKR: 'LK',
+	KRW: 'KR'
 };
 
 },{}],6:[function(require,module,exports){
