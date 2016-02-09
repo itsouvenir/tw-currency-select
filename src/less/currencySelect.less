@@ -47,9 +47,9 @@
 		}
 	}
 
-	.selected {
+	.selected, .active, .selected.active {
 		a {
-			background: @dropdown-link-active-bg !important;
+			background-color: @dropdown-link-active-bg;
 		}
 		.currency-name {
 			color: @dropdown-link-active-color;
@@ -58,10 +58,6 @@
 		.currency-code {
 			color: @dropdown-link-active-color;
 		}
-	}
-
-	.active a {
-		background: @dropdown-link-hover-bg;
 	}
 
 	.bs-searchbox {
