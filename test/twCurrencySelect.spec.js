@@ -250,18 +250,48 @@ describe('Directive: CurrencySelect', function() {
     });
 
     describe('transclude', function() {
-       it('should allow adding a custom LIST element', function() {
-           var directiveElement = getCompiledElementWithTranscludedElement();
-           var options = getAllDropdownOptions(directiveElement);
-           expect(options.length).toBe(2);
-       });
+        it('should allow adding a custom LIST element', function() {
+            var directiveElement = getCompiledElementWithTranscludedElement();
+            var options = getAllDropdownOptions(directiveElement);
+            expect(options.length).toBe(2);
+        });
+    });
+
+    describe('on $destroy', function() {
+        beforeEach(function() {
+            $scope.currencies = [
+                {code: 'GBP', symbol: '£'},
+                {code: 'EUR', symbol: '€'}
+            ];
+        });
+
+        it('should unregister the change handler from the select element', function() {
+            var directiveElement = getCompiledElement();
+            var isolateScope = directiveElement.isolateScope();
+            spyOn(isolateScope.vm, 'onChangeHandler');
+
+            isolateScope.$broadcast('$destroy');
+
+            togglePopup(directiveElement);
+            selectOptionWithIndex(directiveElement, 1);
+
+            expect(isolateScope.vm.onChangeHandler).not.toHaveBeenCalled();
+        });
     });
 
     function selectOptionWithIndex(directiveElement, index) {
         var entry = $(getAllDropdownOptions(directiveElement)[index + 1]);
         entry.find('a').trigger('click');
         $scope.$digest();
-        $timeout.flush();
+        flushTimeoutIfNeeded();
+    }
+
+    function flushTimeoutIfNeeded() {
+        try {
+            $timeout.verifyNoPendingTasks();
+        } catch ( pendingTasksException ) {
+            $timeout.flush();
+        }
     }
 
     function getAllDropdownOptions(directiveElement) {
