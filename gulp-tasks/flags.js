@@ -1,5 +1,4 @@
 var gulp = require('gulp');
-var request = require('request');
 var rename = require('gulp-rename');
 var remoteSrc = require('gulp-remote-src');
 
