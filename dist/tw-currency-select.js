@@ -180,6 +180,9 @@ module.exports = function CurrencySelectDirective($timeout) {
                     });
                 }, true);
 
+                scope.$on('$destroy', function() {
+                   $selectElement.off('change');
+                });
             };
         }
     };
