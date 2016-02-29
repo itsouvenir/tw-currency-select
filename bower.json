@@ -1,6 +1,6 @@
 {
   "name": "tw-currency-select",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "main": [
     "./dist/tw-currency-select.js",
     "./dist/tw-currency-select.css"
@@ -26,8 +26,7 @@
     "angular-mocks": "~1.3.0"
   },
   "resolutions": {
-    "angular": ">=1.2.18",
-    "bootstrap-select": ">=1.7.3"
+    "angular": ">=1.2.18"
   },
   "overrides": {
     "bootstrap": {
