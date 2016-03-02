@@ -267,7 +267,10 @@ module.exports = {
 	GHS: 'GH',
 	RUB: 'RU',
 	LKR: 'LK',
-	KRW: 'KR'
+	KRW: 'KR',
+	VND: 'VN',
+	BDT: 'BD',
+	NPR: 'NP'
 };
 
 },{}],6:[function(require,module,exports){
