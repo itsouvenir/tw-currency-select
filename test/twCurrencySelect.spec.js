@@ -232,7 +232,7 @@ describe('Directive: CurrencySelect', function() {
 
         it('should hide the name in the options when specified', function() {
             var directiveElement = getCompiledElementWithHideNameSelected();
-            var currencyNameElement = directiveElement[0].querySelector('.currency-name');
+            var currencyNameElement = directiveElement[0].querySelector('.currency-select__currency-name');
             expect($(currencyNameElement).hasClass(constants.CLASS_HIDE_NAME_SELECTED)).toBe(true);
         });
     });
@@ -244,7 +244,7 @@ describe('Directive: CurrencySelect', function() {
 
         it('should hide the name in the options when specified', function() {
             var directiveElement = getCompiledElementWithHideNameOptions();
-            var currencyNameElement = directiveElement[0].querySelector('.currency-name');
+            var currencyNameElement = directiveElement[0].querySelector('.currency-select__currency-name');
             expect($(currencyNameElement).hasClass(constants.CLASS_HIDE_NAME_OPTIONS)).toBe(true);
         });
     });

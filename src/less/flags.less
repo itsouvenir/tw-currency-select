@@ -6,27 +6,29 @@
 /* DO NOT CHANGE, IT WAS CAREFULLY RESEARCHED AND CALCULATED! */
 @ruubel-constant : round(100%/(length(@countries48) - 1), 3);
 
-.dropdown-flag {
-	background: no-repeat url(../img/flags.png);
-}
-
-.flag-by-position(@yPosition, @w, @h) {
-	background-position: 0 @yPosition;
-	background-size: cover;
-	width: @w;
-	height: @h;
-}
-
-.flag_none {
-	background-image: none !important;
-}
-
-.flags24(@n, @to) when (@n < @to) {
-	@c: extract(@countries48, @n);
-	.flag24_@{c} {
-		.flag-by-position(((@n - 1) * @ruubel-constant), 24px, 16px);
+.currency-select {
+	.currency-select__dropdown-flag {
+		background: no-repeat url(../img/flags.png);
 	}
-	.flags24(@n + 1, @to);
-}
 
-.flags24(1, length(@countries48) + 1);
+	.flag-by-position(@yPosition, @w, @h) {
+		background-position: 0 @yPosition;
+		background-size: cover;
+		width: @w;
+		height: @h;
+	}
+
+	.currency-select__flag_none {
+		background-image: none !important;
+	}
+
+	.flags24(@n, @to) when (@n < @to) {
+		@c: extract(@countries48, @n);
+		.currency-select__flag24__@{c} {
+			.flag-by-position(((@n - 1) * @ruubel-constant), 24px, 16px);
+		}
+		.flags24(@n + 1, @to);
+	}
+
+	.flags24(1, length(@countries48) + 1);
+}
