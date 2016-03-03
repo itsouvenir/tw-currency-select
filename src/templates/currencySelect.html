@@ -1,5 +1,5 @@
 <select
-        class="selectpicker currencies"
+        class="selectpicker currency-select"
         data-live-search="{{vm.useSearch}}"
         data-live-search-placeholder="{{vm.calculatedSearchPlaceholder}}"
         data-none-results-text="{{vm.calculatedNoResultsText}}"
@@ -8,12 +8,12 @@
     <option data-hidden="true"></option>
     <option ng-repeat="currency in vm.mappedCurrencies track by currency.code"
             data-content=
-                    "<div class='flag-currency-code'>
-                        <div class='flag-wrapper'>
-                            <div class='dropdown-flag flag24_{{vm.flagCode(currency.code)}}'></div>
+                    "<div class='currency-select__flag-currency-code'>
+                        <div class='currency-select__flag-wrapper'>
+                            <div class='currency-select__dropdown-flag currency-select__flag24__{{vm.flagCode(currency.code)}}'></div>
                         </div>
-                        <span class='currency-code'>{{currency.code}}</span>
-                        <span class='currency-name {{vm.hideNameClasses}}'>{{currency.name}}</span>
+                        <span class='currency-select__currency-code'>{{currency.code}}</span>
+                        <span class='currency-select__currency-name {{vm.hideNameClasses}}'>{{currency.name}}</span>
                     </div>"
             value="{{currency.code}}">
         {{currency.code}}
