@@ -1,6 +1,6 @@
 {
   "name": "tw-currency-select",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": [
     "./dist/tw-currency-select.js",
     "./dist/tw-currency-select.css"
@@ -18,7 +18,7 @@
   ],
   "dependencies": {
     "angular": "~1.3.17",
-    "bootstrap": "https://github.com/transferwise/bootstrap.git",
+    "bootstrap": "https://github.com/transferwise/bootstrap.git#>=4.1.1",
     "jquery": "~2.1.4",
     "bootstrap-select": "~1.7.5"
   },
