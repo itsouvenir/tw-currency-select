@@ -156,3 +156,48 @@
 		}
 	}
 }
+
+/* To be removed after Bootstrap 4.1 migration */
+.input-group .currency-select .btn-input {
+	border-color: @input-border;
+}
+.input-group:hover .currency-select .btn-input {
+	border-color: @input-border-hover;
+}
+.input-group .input-group-btn .currency-select .btn-input {
+	border-left-width: 1px;
+	border-left-style: solid;
+}
+
+// Feedback states
+.has-success .input-group {
+	.form-control,
+	.bootstrap-select .btn {
+		border-color: @state-success-text;
+	}
+}
+.has-warning .input-group {
+	.form-control,
+	.bootstrap-select .btn {
+		border-color: @state-warning-text;
+	}
+}
+.has-error .input-group {
+	.form-control,
+	.bootstrap-select .btn {
+		border-color: @state-danger-text;
+	}
+}
+
+.bs-caret {
+	top: 18px;
+	right: 0px;
+	position: absolute;
+}
+.form-group-sm .bs-caret {
+	top: 10px;
+}
+.form-group-sm .bs-caret {
+	top: 20px;
+}
+/* End to be removed */
