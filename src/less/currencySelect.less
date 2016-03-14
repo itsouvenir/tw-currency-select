@@ -44,10 +44,6 @@
 		.currency-select__currency-name {
 			color: @text-color;
 			padding-left: @flag-input-padding-small;
-
-			&.hide-name-selected {
-				display: none;
-			}
 		}
 	}
 
@@ -61,8 +57,13 @@
 		}
 	}
 
-	.dropdown-toggle > .bs-caret > .caret {
-		position: inherit;
+	&.bootstrap-select.btn-group > button.dropdown-toggle {
+		.hide-name-selected {
+			display: none;
+		}
+		.bs-caret > .caret, > .caret {
+			position: static;
+		}
 	}
 
 	.bs-searchbox {
