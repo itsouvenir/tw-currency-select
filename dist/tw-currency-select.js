@@ -1,5 +1,5 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-'use strict'; module.exports = angular.module("tw-currency-select-templates", []).run(["$templateCache", function($templateCache) {$templateCache.put("templates/currencySelect.html","<select\n        class=\"selectpicker currency-select\"\n        data-live-search=\"{{vm.useSearch}}\"\n        data-live-search-placeholder=\"{{vm.calculatedSearchPlaceholder}}\"\n        data-none-results-text=\"{{vm.calculatedNoResultsText}}\"\n        data-none-selected-text=\"{{vm.calculatedNoneSelectedText}}\"\n        data-style=\"btn-input\">\n    <option data-hidden=\"true\"></option>\n    <option ng-repeat=\"currency in vm.mappedCurrencies track by currency.code\"\n            data-content=\n                    \"<div class=\'currency-select__flag-currency-code\'>\n                        <div class=\'currency-select__flag-wrapper\'>\n                            <div class=\'currency-select__dropdown-flag currency-select__flag24__{{vm.flagCode(currency.code)}}\'></div>\n                        </div>\n                        <span class=\'currency-select__currency-code\'>{{currency.code}}</span>\n                        <span class=\'currency-select__currency-name {{vm.hideNameClasses}}\'>{{currency.name}}</span>\n                    </div>\"\n            value=\"{{currency.code}}\">\n        {{currency.code}}\n    </option>\n</select>\n");}]);
+'use strict'; module.exports = angular.module("tw-currency-select-templates", []).run(["$templateCache", function($templateCache) {$templateCache.put("templates/currencySelect.html","<select\n        class=\"selectpicker currency-select\"\n        data-live-search=\"{{vm.useSearch}}\"\n        data-live-search-placeholder=\"{{vm.calculatedSearchPlaceholder}}\"\n        data-none-results-text=\"{{vm.calculatedNoResultsText}}\"\n        data-none-selected-text=\"{{vm.calculatedNoneSelectedText}}\"\n        data-style=\"btn-input\">\n    <option data-hidden=\"true\"></option>\n    <option ng-repeat=\"currency in vm.mappedCurrencies track by currency.code\"\n            ng-if=\"vm.excludeCurrency.code !== currency.code\"\n            data-content=\n                    \"<div class=\'currency-select__flag-currency-code\'>\n                        <div class=\'currency-select__flag-wrapper\'>\n                            <div class=\'currency-select__dropdown-flag currency-select__flag24__{{vm.flagCode(currency.code)}}\'></div>\n                        </div>\n                        <span class=\'currency-select__currency-code\'>{{currency.code}}</span>\n                        <span class=\'currency-select__currency-name {{vm.hideNameClasses}}\'>{{currency.name}}</span>\n                    </div>\"\n            value=\"{{currency.code}}\">\n        {{currency.code}}\n    </option>\n</select>\n");}]);
 },{}],2:[function(require,module,exports){
 (function (global){
 'use strict';
@@ -142,7 +142,8 @@ module.exports = function CurrencySelectDirective($timeout) {
             noResultsText: '@',
             noneSelectedText: '@',
             hideNameSelected: '@',
-            hideNameOptions: '@'
+            hideNameOptions: '@',
+            excludeCurrency: "=?"
         }, compile: function() {
             return function(scope, element, atts, controller, transcludeFn) {
                 var $selectElement = $(element).find('select');
@@ -167,6 +168,16 @@ module.exports = function CurrencySelectDirective($timeout) {
                             $selectElement.selectpicker('val', '');
                             moveTranscludedElement(element, transcludeFn);
                         }
+                    });
+                });
+
+                scope.$watch('vm.excludeCurrency', function(newVal) {
+                    if (!newVal) {
+                        return;
+                    }
+                    $timeout(function () {
+                        $selectElement.selectpicker('refresh');
+                        moveTranscludedElement(element, transcludeFn);
                     });
                 });
 

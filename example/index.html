@@ -248,5 +248,28 @@
         <li><a ng-click="otherClicked()">Other</a></li>
     </currency-select>
 </section>
+<section class="m-b-l m-t-lg clearfix">
+    <h3>Excluding currency</h3>
+
+    <div class="m-t-md">Select currency to exclude:</div>
+    <currency-select
+            search-placeholder="Search..."
+            hide-name-selected="true"
+            none-selected-text="Nothing selected"
+            ng-model="excludeCurrency"
+            currencies="currenciesWithNames">
+    </currency-select>
+
+    <div class="m-t-md">See the currency disappear from here:</div>
+    <currency-select
+            search-placeholder="Search..."
+            hide-name-selected="true"
+            none-selected-text="Nothing selected"
+            exclude-currency="excludeCurrency"
+            ng-model="selectedCurrencyCode12"
+            currencies="currenciesWithNames">
+    </currency-select>
+
+</section>
 </body>
 </html>

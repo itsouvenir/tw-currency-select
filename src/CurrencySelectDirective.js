@@ -24,7 +24,8 @@ module.exports = function CurrencySelectDirective($timeout) {
             noResultsText: '@',
             noneSelectedText: '@',
             hideNameSelected: '@',
-            hideNameOptions: '@'
+            hideNameOptions: '@',
+            excludeCurrency: "=?"
         }, compile: function() {
             return function(scope, element, atts, controller, transcludeFn) {
                 var $selectElement = $(element).find('select');
@@ -49,6 +50,16 @@ module.exports = function CurrencySelectDirective($timeout) {
                             $selectElement.selectpicker('val', '');
                             moveTranscludedElement(element, transcludeFn);
                         }
+                    });
+                });
+
+                scope.$watch('vm.excludeCurrency', function(newVal) {
+                    if (!newVal) {
+                        return;
+                    }
+                    $timeout(function () {
+                        $selectElement.selectpicker('refresh');
+                        moveTranscludedElement(element, transcludeFn);
                     });
                 });
 

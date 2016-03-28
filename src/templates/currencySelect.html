@@ -7,6 +7,7 @@
         data-style="btn-input">
     <option data-hidden="true"></option>
     <option ng-repeat="currency in vm.mappedCurrencies track by currency.code"
+            ng-if="vm.excludeCurrency.code !== currency.code"
             data-content=
                     "<div class='currency-select__flag-currency-code'>
                         <div class='currency-select__flag-wrapper'>
