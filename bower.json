@@ -17,13 +17,13 @@
     "README.md"
   ],
   "dependencies": {
-    "angular": "~1.3.17",
-    "bootstrap": "https://github.com/transferwise/bootstrap.git#>=4.1.1",
+    "angular": "~1.5.8",
+    "bootstrap": "https://github.com/transferwise/bootstrap.git#>=5.0.5",
     "jquery": "~2.1.4",
-    "bootstrap-select": "~1.10.0"
+    "bootstrap-select": "~1.11.2"
   },
   "devDependencies": {
-    "angular-mocks": "~1.3.0"
+    "angular-mocks": "~1.5.8"
   },
   "resolutions": {
     "angular": ">=1.2.18"

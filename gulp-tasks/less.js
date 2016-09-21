@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var less = require('gulp-less');
-var minifyCSS = require('gulp-minify-css');
+var cleanCSS = require('gulp-clean-css');
 var rename = require('gulp-rename');
 var base64 = require('gulp-base64');
 
@@ -11,7 +11,7 @@ gulp.task('less', ['bower'], function() {
             extensions: ['png'],
             debug: true
         }))
-        .pipe(minifyCSS())
+        .pipe(cleanCSS())
         .pipe(rename('tw-currency-select.css'))
         .pipe(gulp.dest('./dist'));
 });
